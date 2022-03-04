@@ -1,0 +1,549 @@
+{
+	"info": {
+		"_postman_id": "c9d84eae-4903-4b2b-aabe-71fc344d3f3b",
+		"name": "PrestaCarro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "CREATE PERSON",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDIyNDYwLCJleHAiOjE2NDY0MjYwNjB9.QQS60dUceoKqpP-efsJiL7YwiwQBcZvsClbzG-p8k44Qfpn6JC7rLIRJa-6PjTVq5SlxqzBYRcZceKFmp89bcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Juan\",\r\n    \"middleName\": \"Pablo\",\r\n    \"lastName\": \"Rueda\",\r\n    \"surName\": \"\",\r\n    \"documentNumber\": \"\",\r\n    \"birthDate\" : \"19981022\",\r\n    \"sex\" : \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/persons/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"persons",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PEOPLE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/persons/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"persons",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PERSON/ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/persons/103",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"persons",
+								"103"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PERSON BY DOCUMENT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDIyNDYwLCJleHAiOjE2NDY0MjYwNjB9.QQS60dUceoKqpP-efsJiL7YwiwQBcZvsClbzG-p8k44Qfpn6JC7rLIRJa-6PjTVq5SlxqzBYRcZceKFmp89bcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/persons?documentNumber=123453453",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"persons"
+							],
+							"query": [
+								{
+									"key": "documentNumber",
+									"value": "12345678"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actives",
+			"item": [
+				{
+					"name": "CREATE ACTIVE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"internalCode\": \"test\",\r\n    \"serial\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/actives/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actives",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ACTIVES",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDMxNTgzLCJleHAiOjE2NDY0MzUxODN9.u9hfgqV_f_UanihsrqR0vRJse-BBl-y11YrpnuR0CWL0cD2ufX1HTRZxcV3vzPV7blaIMZdDqdsCJc7krDT1aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/actives/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actives",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ACTIVE/ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/actives/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actives",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/actives/1/disable",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDMxNTgzLCJleHAiOjE2NDY0MzUxODN9.u9hfgqV_f_UanihsrqR0vRJse-BBl-y11YrpnuR0CWL0cD2ufX1HTRZxcV3vzPV7blaIMZdDqdsCJc7krDT1aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actives/1/disable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actives",
+								"1",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "GET LOAN/ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/loans/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loans",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE LOAN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idPerson\":102,\r\n    \"idActive\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/loans/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loans",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LOANS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDI3ODE2LCJleHAiOjE2NDY0MzE0MTZ9.VxuY4-CN9Yj_kEspdGwQF1r9Umzjja2RaXe4dVVk-_VVDpFzQZnDDWPsjxDVRlbClsGfvYV5nuTQSIksJAgvVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/loans/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loans",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LOANS EXCEL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/loans/download?startDate=2020-02-01&endDate=2022-02-07",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loans",
+								"download"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2020-02-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2022-02-07"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Returns",
+			"item": [
+				{
+					"name": "CREATE RETURN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idLoan\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/returns/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"returns",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET RETURN/ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/returns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"returns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juan@mail.com\",\n    \"password\": \"hola\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RefreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"255ad102-73a6-47b3-a633-f3c56c355fa478\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/refreshtoken",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"refreshtoken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
