@@ -5,6 +5,7 @@ import java.net.URI;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.MediaTypes;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gwtsas.prestacarro.components.MessageResponse;
 import com.gwtsas.prestacarro.entities.Person;
 import com.gwtsas.prestacarro.models.PersonModelAssembler;
 import com.gwtsas.prestacarro.services.impl.PersonServiceImpl;
@@ -59,8 +61,15 @@ public class PersonController {
 
 	@PostMapping
 	public ResponseEntity<?> createPerson(@RequestBody Person person) {
-		person = personServiceImpl.createPerson(person);
-		return ResponseEntity.created(URI.create("/person/" + String.valueOf(person.getId()))).build();
+		try {
+			person = personServiceImpl.createPerson(person);
+			return ResponseEntity.created(URI.create("/person/" + String.valueOf(person.getId()))).build();
+		}
+		catch(DataIntegrityViolationException exception) {
+			exception.printStackTrace();
+			return ResponseEntity.unprocessableEntity().body(new MessageResponse(exception.getMessage()));
+		}
+		
 	}
 
 	@GetMapping
