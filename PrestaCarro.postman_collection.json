@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Juan\",\r\n    \"middleName\": \"Pablo\",\r\n    \"lastName\": \"Rueda\",\r\n    \"surName\": \"\",\r\n    \"documentNumber\": \"\",\r\n    \"birthDate\" : \"19981022\",\r\n    \"sex\" : \"M\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Juan\",\r\n    \"lastName\": \"Rueda\",\r\n    \"surName\": \"Gomez\",\r\n    \"middleName\": \"Pablo\",\r\n    \"documentNumber\": \"3691215\",\r\n    \"birthDate\" : \"19981022\",\r\n    \"sex\" : \"M\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,7 +120,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/persons?documentNumber=123453453",
+							"raw": "localhost:8080/persons?documentNumber=12345678",
 							"host": [
 								"localhost"
 							],
@@ -211,6 +211,41 @@
 					"response": []
 				},
 				{
+					"name": "TEST DISCAPACITADOS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDMxNTgzLCJleHAiOjE2NDY0MzUxODN9.u9hfgqV_f_UanihsrqR0vRJse-BBl-y11YrpnuR0CWL0cD2ufX1HTRZxcV3vzPV7blaIMZdDqdsCJc7krDT1aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/actives/least-used?actives=C01,C02,C03",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actives",
+								"least-used"
+							],
+							"query": [
+								{
+									"key": "actives",
+									"value": "C01,C02,C03"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET ACTIVE/ID",
 					"request": {
 						"auth": {
@@ -291,14 +326,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/loans/10",
+							"raw": "localhost:8080/loans/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"loans",
-								"10"
+								"1"
 							]
 						}
 					},
@@ -321,7 +356,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idPerson\":102,\r\n    \"idActive\": 1\r\n}",
+							"raw": "{\r\n    \"idPerson\":1,\r\n    \"idActive\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -387,7 +422,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/loans/download?startDate=2020-02-01&endDate=2022-02-07",
+							"raw": "localhost:8080/loans/download?startDate=2020-02-01&endDate=2022-10-10",
 							"host": [
 								"localhost"
 							],
@@ -403,7 +438,7 @@
 								},
 								{
 									"key": "endDate",
-									"value": "2022-02-07"
+									"value": "2022-10-10"
 								}
 							]
 						}
@@ -432,7 +467,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idLoan\": 10\r\n}",
+							"raw": "{\r\n  \"idLoan\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -50,10 +50,11 @@ public class ExcelHelper {
 				Row row = sheet.createRow(rowIdx++);
 				// LOAN
 				row.createCell(0).setCellValue(loan.getId());
-				row.createCell(5).setCellValue(loan.getRegistrationDate());
+				row.createCell(5).setCellValue(loan.getRegistrationDate().toString());
 
 				// PERSON
-				row.createCell(1).setCellValue(loan.getRegistrationDate());
+				//row.createCell(1).setCellValue(loan.getRegistrationDate().toString());
+				row.createCell(1).setCellValue(loan.getPerson().getFullName());
 				row.createCell(2).setCellValue(loan.getPerson().getDocumentNumber());
 				row.createCell(3).setCellValue(loan.getPerson().getBirthDate());
 				row.createCell(4).setCellValue(loan.getPerson().getSex());
@@ -63,7 +64,7 @@ public class ExcelHelper {
 
 				// RETURN
 				try {
-					row.createCell(7).setCellValue(loan.getReturnObject().getRegistrationDate());
+					row.createCell(7).setCellValue(loan.getReturnObject().getRegistrationDate().toString());
 				}
 				catch(NullPointerException exception) {
 					row.createCell(7).setCellValue("N/D");
