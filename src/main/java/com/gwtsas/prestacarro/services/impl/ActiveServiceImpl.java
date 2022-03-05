@@ -41,4 +41,10 @@ public class ActiveServiceImpl implements ActiveService{
 		return activeRepository.save(active);
 	}
 
+	@Override
+	public Active getTheLeastUsedActive(List<String> actives) {
+		// TODO Auto-generated method stub
+		return activeRepository.getLeastUsedActive(actives).get();
+	}
+
 }

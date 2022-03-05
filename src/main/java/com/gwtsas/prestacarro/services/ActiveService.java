@@ -14,4 +14,6 @@ public interface ActiveService {
 	Active createActive(ActiveSchema activeSchema);
 	
 	Active changeDisableStatus(Long id, boolean value);
+	
+	Active getTheLeastUsedActive(List<String> actives);
 }
