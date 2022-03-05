@@ -3,17 +3,17 @@ package com.gwtsas.prestacarro.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,12 +35,8 @@ public class Return implements Serializable {
 	)
 	private LocalDate registrationDate = LocalDate.now();
 	
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(
-			name = "id_loan",
-			referencedColumnName = "id_loan",
-			nullable = false
-	)
+	@JsonIgnore
+	@OneToOne(fetch = FetchType.EAGER)
 	private Loan loan;
 	
 	public Loan getLoan() {

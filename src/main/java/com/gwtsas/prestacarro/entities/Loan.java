@@ -64,7 +64,12 @@ public class Loan implements Serializable {
 	private LocalDate registrationDate = LocalDate.now();
 	
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(
+			name = "id_loan",
+			referencedColumnName = "id_loan",
+			nullable = false
+	)
 	private Return returnObject;
 	
 	//

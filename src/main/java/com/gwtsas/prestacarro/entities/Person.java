@@ -45,7 +45,7 @@ public class Person implements Serializable{
 	private String surName;
 	
     @NotBlank(message = "The document should not be empty")
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String documentNumber;
 	
     @NotBlank(message = "Document number should not be empty")
@@ -84,7 +84,7 @@ public class Person implements Serializable{
 	}
 
 	public String getSurName() {
-		return surName;
+		 return surName;
 	}
 
 	public String getDocumentNumber() {
@@ -101,6 +101,20 @@ public class Person implements Serializable{
 	
 	public String getSex() {
 		return sex;
+	}
+
+	public String getFullName() {
+		
+		 var stringBuilder = new StringBuilder();
+		 
+		 stringBuilder
+		 	.append(firstName)
+		 	.append(middleName != null ? " " + middleName +  " " : " ")
+		 	.append(lastName)
+		 	.append(surName == null ? "" : " " + surName)
+		 	;
+		 
+		return stringBuilder.toString();
 	}
 
 }
