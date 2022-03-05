@@ -1,6 +1,7 @@
 package com.gwtsas.prestacarro.controllers;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ import com.gwtsas.prestacarro.schemas.ActiveSchema;
 import com.gwtsas.prestacarro.services.impl.ActiveServiceImpl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/actives")
@@ -71,6 +73,13 @@ public class ActiveController {
 	@PutMapping("/{id}/enable")
 	public ResponseEntity<?> enableActive(@PathVariable Long id) {
 		return ResponseEntity.ok(activeServiceImpl.changeDisableStatus(id, false));
+	}
+	
+	@GetMapping("/least-used")
+	public ResponseEntity<?> getTheLeastUsedActive(@RequestParam String actives){
+		List<String> list = Arrays.asList(actives.split(",", 8));
+		 
+		return ResponseEntity.ok(activeServiceImpl.getTheLeastUsedActive(list));
 	}
 
 }
