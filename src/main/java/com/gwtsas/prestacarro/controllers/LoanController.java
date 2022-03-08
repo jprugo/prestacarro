@@ -17,10 +17,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gwtsas.prestacarro.entities.Loan;
+import com.gwtsas.prestacarro.entities.Return;
 import com.gwtsas.prestacarro.models.LoanModelAssembler;
 import com.gwtsas.prestacarro.schemas.LoanSchema;
 import com.gwtsas.prestacarro.services.impl.LoanServiceImpl;
@@ -87,5 +89,13 @@ public class LoanController {
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
 				.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
 	}
-
+	
+	@PutMapping("/complete-last")
+	public ResponseEntity<?> completeLastLoan(@Valid @RequestParam String internalCode) {
+		var loan = loanServiceImpl.getLastActiveLoan(internalCode);
+		loan.setReturnObject(new Return(loan));
+		loan = loanServiceImpl.updateLoan(loan);
+		return ResponseEntity.ok(loan);
+	}
+	
 }

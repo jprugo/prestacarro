@@ -1,7 +1,7 @@
 package com.gwtsas.prestacarro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,7 +61,7 @@ public class Loan implements Serializable {
 			nullable = false, 
 			columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP()"
 	)
-	private LocalDate registrationDate = LocalDate.now();
+	private LocalDateTime registrationDate = LocalDateTime.now();
 	
 	
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -86,7 +86,7 @@ public class Loan implements Serializable {
 		return person;
 	}
 
-	public LocalDate getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
@@ -106,7 +106,7 @@ public class Loan implements Serializable {
 		this.person = person;
 	}
 
-	public void setRegistrationDate(LocalDate registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

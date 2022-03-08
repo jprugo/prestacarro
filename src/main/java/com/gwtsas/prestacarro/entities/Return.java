@@ -1,8 +1,7 @@
 package com.gwtsas.prestacarro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +32,7 @@ public class Return implements Serializable {
 			nullable= false,
 			columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP()"
 	)
-	private LocalDate registrationDate = LocalDate.now();
+	private LocalDateTime registrationDate = LocalDateTime.now();
 	
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER)
@@ -47,7 +46,7 @@ public class Return implements Serializable {
 		return id;
 	}
 
-	public LocalDate getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
@@ -55,7 +54,7 @@ public class Return implements Serializable {
 		this.id = id;
 	}
 
-	public void setRegistrationDate(LocalDate registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

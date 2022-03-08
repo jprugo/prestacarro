@@ -17,5 +17,9 @@ public interface LoanService {
 	
 	Loan createLoan(LoanSchema loan);
 	
+	Loan getLastActiveLoan(String internalCode);
+	
 	ByteArrayInputStream getExcelFile(LocalDate startDate, LocalDate endDate);
+
+	Loan updateLoan(Loan loan);
 }

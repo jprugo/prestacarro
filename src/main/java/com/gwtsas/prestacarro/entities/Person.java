@@ -1,7 +1,7 @@
 package com.gwtsas.prestacarro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -61,7 +61,7 @@ public class Person implements Serializable{
 			nullable= false,
 			columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP()"
 	)
-	private LocalDate registrationDate = LocalDate.now();
+	private LocalDateTime registrationDate = LocalDateTime.now();
 	
 
 	@OneToMany(mappedBy="person", fetch = FetchType.LAZY)
@@ -95,7 +95,7 @@ public class Person implements Serializable{
 		return birthDate;
 	}
 
-	public LocalDate getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 	

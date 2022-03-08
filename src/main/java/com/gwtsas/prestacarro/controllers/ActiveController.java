@@ -62,7 +62,7 @@ public class ActiveController {
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(active.getId())
 				.toUri();
 
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).body(active);
 	}
 
 	@PutMapping("/{id}/disable")

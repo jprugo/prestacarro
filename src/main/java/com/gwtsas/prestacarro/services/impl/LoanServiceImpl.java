@@ -57,4 +57,15 @@ public class LoanServiceImpl implements LoanService {
 		);
 		return loanRepository.save(loan);
 	}
+
+	@Override
+	public Loan getLastActiveLoan(String internalCode) {
+		return loanRepository.getLastActiveLoan(internalCode).get();
+	}
+
+	@Override	
+	public Loan updateLoan(Loan loan) {
+		return loanRepository.save(loan);
+	}
+	
 }

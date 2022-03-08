@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gwtsas.prestacarro.components.MessageResponse;
 import com.gwtsas.prestacarro.entities.Person;
 import com.gwtsas.prestacarro.models.PersonModelAssembler;
 import com.gwtsas.prestacarro.services.impl.PersonServiceImpl;
@@ -53,21 +52,15 @@ public class PersonController {
 
 	}
 
-	/*
-	 * @GetMapping public ResponseEntity<List<Person>> getAll() { List<Person>
-	 * resultList = personServiceImpl.getAll(); return resultList.size() > 0 ?
-	 * ResponseEntity.ok(resultList) : ResponseEntity.noContent().build(); }
-	 */
-
 	@PostMapping
 	public ResponseEntity<?> createPerson(@RequestBody Person person) {
 		try {
 			person = personServiceImpl.createPerson(person);
-			return ResponseEntity.created(URI.create("/person/" + String.valueOf(person.getId()))).build();
+			return ResponseEntity.created(URI.create("/person/" + String.valueOf(person.getId()))).body(person);
 		}
 		catch(DataIntegrityViolationException exception) {
-			exception.printStackTrace();
-			return ResponseEntity.unprocessableEntity().body(new MessageResponse(exception.getMessage()));
+			person = personServiceImpl.getPersonByDocumentNumber(person.getDocumentNumber());
+			return ResponseEntity.status(208).body(person);
 		}
 		
 	}
