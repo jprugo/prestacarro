@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/persons")
 public class PersonController {
 
@@ -39,7 +41,7 @@ public class PersonController {
 
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
-			@RequestParam(defaultValue = "100") Integer pageSize) {
+			@RequestParam(defaultValue = "2") Integer pageSize) {
 
 		Page<Person> resultList = personServiceImpl.getAll(pageNumber, pageSize);
 

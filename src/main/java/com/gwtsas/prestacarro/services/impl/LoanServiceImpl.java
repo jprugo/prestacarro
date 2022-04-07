@@ -1,7 +1,7 @@
 package com.gwtsas.prestacarro.services.impl;
 
 import java.io.ByteArrayInputStream;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public ByteArrayInputStream getExcelFile(LocalDate startDate, LocalDate endDate) {
+	public ByteArrayInputStream getExcelFile(LocalDateTime startDate, LocalDateTime endDate) {
 		List<Loan> loans = loanRepository.getLoansBetweenDates(startDate, endDate);
 		ByteArrayInputStream in = ExcelHelper.loansToExcel(loans);
 		return in;

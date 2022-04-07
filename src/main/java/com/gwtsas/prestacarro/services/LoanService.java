@@ -1,7 +1,7 @@
 package com.gwtsas.prestacarro.services;
 
 import java.io.ByteArrayInputStream;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 
@@ -19,7 +19,7 @@ public interface LoanService {
 	
 	Loan getLastActiveLoan(String internalCode);
 	
-	ByteArrayInputStream getExcelFile(LocalDate startDate, LocalDate endDate);
+	ByteArrayInputStream getExcelFile(LocalDateTime startDate, LocalDateTime endDate);
 
 	Loan updateLoan(Loan loan);
 }
