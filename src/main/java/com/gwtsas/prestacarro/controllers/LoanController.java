@@ -61,7 +61,6 @@ public class LoanController {
 		System.out.println(resultList.getTotalElements());
 
 		if (resultList.hasContent()) {
-			System.out.println("Si hay content");
 			return ResponseEntity.ok().contentType(MediaTypes.HAL_JSON)
 					.body(pagedResourceAssembler.toModel(resultList, loanModelAssembler));
 		} else {
@@ -79,7 +78,7 @@ public class LoanController {
 	@PostMapping
 	public ResponseEntity<?> createLoan(@Valid @RequestBody LoanSchema loanJson) {
 		var loan = loanServiceImpl.createLoan(loanJson);
-		return ResponseEntity.created(URI.create("/loan/" + String.valueOf(loan.getId()))).build();
+		return ResponseEntity.created(URI.create("/loan/" + String.valueOf(loan.getId()))).body(loan);
 	}
 
 	@GetMapping("/download")

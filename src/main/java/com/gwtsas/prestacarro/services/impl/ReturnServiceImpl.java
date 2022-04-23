@@ -28,4 +28,9 @@ public class ReturnServiceImpl implements ReturnService {
 		return returnRepository.findById(id).get();
 	}
 
+	@Override
+	public Return getReturnByLoan(Long idLoan) {
+		return returnRepository.getReturnByLoan(loanServiceImpl.getLoanById(idLoan));
+	}
+
 }

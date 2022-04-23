@@ -8,4 +8,6 @@ public interface ReturnService {
 	Return createReturn(ReturnSchema returnJson);
 	
 	Return getReturnById(Long id);
+	
+	Return getReturnByLoan(Long idLoan);
 }

@@ -3,6 +3,7 @@ package com.gwtsas.prestacarro.controllers;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,18 +29,22 @@ public class ReturnController {
 
 	@PostMapping
 	public ResponseEntity<?> createReturn(@RequestBody ReturnSchema returnSchema) throws JsonProcessingException {
-		Return returnObject = returnServiceImpl.createReturn(returnSchema);
-		return ResponseEntity.created(URI.create("/return/" + String.valueOf(returnObject.getId()))).build();
+		
+		try {
+			Return returnObject = returnServiceImpl.createReturn(returnSchema);
+			return ResponseEntity.created(URI.create("/return/" + String.valueOf(returnObject.getId()))).body(returnObject.getLoan());
+		}
+		catch(DataIntegrityViolationException exception) {
+			Return returnObject = returnServiceImpl.getReturnByLoan(returnSchema.getIdLoan());
+			return ResponseEntity.status(208).body(returnObject);
+		}
+		
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Return> getReturnById(@PathVariable Long id) {
-		try {
-			Return returnObj = returnServiceImpl.getReturnById(id);
-			return ResponseEntity.ok(returnObj);
-		} catch (Exception exception) {
-			return ResponseEntity.notFound().build();
-		}
+		Return returnObj = returnServiceImpl.getReturnById(id);
+		return ResponseEntity.ok(returnObj);
 	}
 
 }

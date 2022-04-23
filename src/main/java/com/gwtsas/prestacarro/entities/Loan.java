@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -64,15 +62,9 @@ public class Loan implements Serializable {
 	private LocalDateTime registrationDate = LocalDateTime.now();
 	
 	
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(
-			name = "id_loan",
-			referencedColumnName = "id_loan",
-			nullable = false
-	)
+	@OneToOne(fetch = FetchType.EAGER)
 	private Return returnObject;
 	
-	//
 
 	public Long getId() {
 		return id;

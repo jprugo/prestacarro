@@ -41,7 +41,7 @@ public class PersonController {
 
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
-			@RequestParam(defaultValue = "2") Integer pageSize) {
+			@RequestParam(defaultValue = "100") Integer pageSize) {
 
 		Page<Person> resultList = personServiceImpl.getAll(pageNumber, pageSize);
 
@@ -75,12 +75,8 @@ public class PersonController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Person> getPersonById(@PathVariable Long id) {
-		try {
-			Person person = personServiceImpl.getPersonaById(id);
-			return ResponseEntity.ok(person);
-		} catch (Exception exception) {
-			return ResponseEntity.notFound().build();
-		}
+		Person person = personServiceImpl.getPersonaById(id);
+		return ResponseEntity.ok(person);
 	}
 
 	@PutMapping

@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Juan\",\r\n    \"lastName\": \"Rueda\",\r\n    \"surName\": \"Gomez\",\r\n    \"middleName\": \"Pablo\",\r\n    \"documentNumber\": \"3691215\",\r\n    \"birthDate\" : \"19981022\",\r\n    \"sex\" : \"M\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Julian\",\r\n    \"lastName\": \"Nieto\",\r\n    \"documentNumber\": \"987654321\",\r\n    \"birthDate\" : \"19981022\",\r\n    \"sex\" : \"M\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,7 +226,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/actives/least-used?actives=C01,C02,C03",
+							"raw": "localhost:8080/actives/least-used?actives=test",
 							"host": [
 								"localhost"
 							],
@@ -238,7 +238,7 @@
 							"query": [
 								{
 									"key": "actives",
-									"value": "C01,C02,C03"
+									"value": "test"
 								}
 							]
 						}
@@ -372,6 +372,50 @@
 							"path": [
 								"loans",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COMPLETE LAST LOAN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNjQ2NDE4NDk1LCJleHAiOjE2NDY0MjIwOTV9.5pFYE9DIJWDkYdJIdwjVdJKNUTSgIZ_ibopbrRIxsTV1L13imxP9eBxGIEtYuufA8getbyCahvjIAoOX7vSBAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/loans/complete-last?internalCode=test",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loans",
+								"complete-last"
+							],
+							"query": [
+								{
+									"key": "internalCode",
+									"value": "test"
+								}
 							]
 						}
 					},
