@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tbl_loan")
 @JsonIgnoreProperties({ "hibernateLazyInitializer" })
 public class Loan implements Serializable {
-	
+
 	private static final long serialVersionUID = 1973338459522680796L;
 
 	@Id
@@ -29,42 +29,19 @@ public class Loan implements Serializable {
 	@Column(name = "id_loan")
 	private Long id;
 
-	
-	@ManyToOne(
-			//cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE},
-			cascade = CascadeType.MERGE,
-			fetch = FetchType.EAGER
-	)
-	@JoinColumn(
-			name = "id_active",
-			referencedColumnName = "id_active",
-			nullable = false
-	)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_active", referencedColumnName = "id_active", nullable = false)
 	private Active active;
 
-	@ManyToOne(
-			//cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE},
-			cascade = CascadeType.MERGE,
-			fetch = FetchType.EAGER
-	)
-	@JoinColumn(
-			name = "id_person",
-			referencedColumnName = "id_person",
-			nullable = false
-	)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_person", referencedColumnName = "id_person", nullable = false)
 	private Person person;
 
-	@Column(
-			name = "loan_registration_date", 
-			nullable = false, 
-			columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP()"
-	)
+	@Column(name = "loan_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP()")
 	private LocalDateTime registrationDate = LocalDateTime.now();
-	
-	
-	@OneToOne(fetch = FetchType.EAGER)
+
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "loan")
 	private Return returnObject;
-	
 
 	public Long getId() {
 		return id;
@@ -85,7 +62,7 @@ public class Loan implements Serializable {
 	public Return getReturnObject() {
 		return returnObject;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -105,7 +82,7 @@ public class Loan implements Serializable {
 	public void setReturnObject(Return returnObject) {
 		this.returnObject = returnObject;
 	}
-	
+
 	// Constructors
 	public Loan(Active active, Person person) {
 		this.active = active;
@@ -115,8 +92,5 @@ public class Loan implements Serializable {
 	protected Loan() {
 		super();
 	}
-	
-	
-	
-	
+
 }

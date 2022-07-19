@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,9 +25,6 @@ import com.gwtsas.prestacarro.entities.Active;
 import com.gwtsas.prestacarro.models.ActiveModelAssembler;
 import com.gwtsas.prestacarro.schemas.ActiveSchema;
 import com.gwtsas.prestacarro.services.impl.ActiveServiceImpl;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -40,11 +39,11 @@ public class ActiveController {
 
 	@GetMapping
 	public ResponseEntity<?> getAll() {
-		
+
 		List<Active> resultList = activeServiceImpl.getAllActives();
 		if (resultList.size() > 0) {
-			
-			var body  = resultList.stream().map(e -> activeModelAssembler.toModel(e)).collect(Collectors.toList());
+
+			var body = resultList.stream().map(e -> activeModelAssembler.toModel(e)).collect(Collectors.toList());
 
 			return ResponseEntity.ok().contentType(MediaTypes.HAL_JSON).body(body);
 		} else {
@@ -76,11 +75,11 @@ public class ActiveController {
 	public ResponseEntity<?> enableActive(@PathVariable Long id) {
 		return ResponseEntity.ok(activeServiceImpl.changeDisableStatus(id, false));
 	}
-	
+
 	@GetMapping("/least-used")
-	public ResponseEntity<?> getTheLeastUsedActive(@RequestParam String actives){
+	public ResponseEntity<?> getTheLeastUsedActive(@RequestParam String actives) {
 		List<String> list = Arrays.asList(actives.split(",", 8));
-		 
+
 		return ResponseEntity.ok(activeServiceImpl.getTheLeastUsedActive(list));
 	}
 

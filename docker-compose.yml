@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  mysql_db:
+    image: "mysql:8.0"
+    environment:
+      - MYSQL_ROOT_PASSWORD=GW2022
+    ports:
+      - 3306:3306
+    networks:
+      - prestacarro-network
+  # backend:
+  #   image: 'prestacarro:0.0.1-SNAPSHOT'
+  #   # environment:
+  #   #     SPRING_DATASOURCE_URL: 'jdbc:mysql://bd:3306/gwtsasPrestaCarro?createDatabaseIfNotExist=true'
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - "mysql_db"
+  #   restart: on-failure
+  #   networks:
+  #     - prestacarro-network
+
+networks:
+  prestacarro-network: 

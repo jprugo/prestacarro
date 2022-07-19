@@ -16,10 +16,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gwtsas.prestacarro.entities.Loan;
@@ -29,10 +31,6 @@ import com.gwtsas.prestacarro.schemas.LoanSchema;
 import com.gwtsas.prestacarro.services.impl.LoanServiceImpl;
 
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -49,8 +47,9 @@ public class LoanController {
 	@Autowired
 	public PagedResourcesAssembler<Loan> pagedResourceAssembler;
 
-	/*@Autowired
-	public PageConfiguration pageConfiguration;*/
+	/*
+	 * @Autowired public PageConfiguration pageConfiguration;
+	 */
 
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
@@ -86,12 +85,15 @@ public class LoanController {
 			@RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 		String filename = "loans.xlsx";
-		
-		InputStreamResource file = new InputStreamResource(loanServiceImpl.getExcelFile(startDate.atStartOfDay(), endDate.atStartOfDay()));
+
+		InputStreamResource file = new InputStreamResource(
+				loanServiceImpl.getExcelFile(startDate.atStartOfDay(), endDate.atStartOfDay()));
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8")).body(file);
+				.contentType(MediaType.parseMediaType(
+						"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"))
+				.body(file);
 	}
-	
+
 	@PutMapping("/complete-last")
 	public ResponseEntity<?> completeLastLoan(@Valid @RequestParam String internalCode) {
 		var loan = loanServiceImpl.getLastActiveLoan(internalCode);
@@ -99,5 +101,5 @@ public class LoanController {
 		loan = loanServiceImpl.updateLoan(loan);
 		return ResponseEntity.ok(loan);
 	}
-	
+
 }

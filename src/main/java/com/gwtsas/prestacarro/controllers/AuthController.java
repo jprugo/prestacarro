@@ -44,19 +44,19 @@ public class AuthController {
 
 	@Autowired
 	AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	RoleRepository roleRepository;
-	
+
 	@Autowired
 	PasswordEncoder encoder;
-	
+
 	@Autowired
 	RefreshTokenService refreshTokenService;
-	
+
 	@Autowired
 	JwtUtils jwtUtils;
 
@@ -70,7 +70,7 @@ public class AuthController {
 		String jwt = jwtUtils.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-		
+
 		RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
 		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())

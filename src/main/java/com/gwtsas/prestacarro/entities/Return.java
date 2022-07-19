@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tbl_return")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 public class Return implements Serializable {
-	
+
 	private static final long serialVersionUID = 7738306214296347980L;
 
 	@Id
@@ -29,23 +28,14 @@ public class Return implements Serializable {
 	@Column(name = "id_return")
 	private Long id;
 
-	@Column(
-			name = "return_registration_date",
-			nullable= false,
-			columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP()"
-	)
+	@Column(name = "return_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP()")
 	private LocalDateTime registrationDate = LocalDateTime.now();
-	
+
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(
-			name = "id_loan",
-			referencedColumnName = "id_loan",
-			nullable = false,
-			unique=true
-	)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_loan", referencedColumnName = "id_loan", nullable = false, unique = true)
 	private Loan loan;
-	
+
 	public Loan getLoan() {
 		return loan;
 	}
@@ -69,17 +59,13 @@ public class Return implements Serializable {
 	public void setLoan(Loan loan) {
 		this.loan = loan;
 	}
-	
-	// Constructors
-	
+
 	public Return(Loan loan) {
 		this.loan = loan;
 	}
-	
+
 	protected Return() {
 		super();
 	}
-	
-	
-	
+
 }
