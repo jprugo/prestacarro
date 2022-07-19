@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c9d84eae-4903-4b2b-aabe-71fc344d3f3b",
+		"_postman_id": "3dfdbddf-acde-4790-87af-28970022f056",
 		"name": "PrestaCarro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -33,11 +33,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/persons/",
+							"raw": "{{baseUrl}}{{path}}/persons/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"persons",
 								""
@@ -62,11 +61,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/persons/all",
+							"raw": "{{baseUrl}}{{path}}/persons/all",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"persons",
 								"all"
@@ -91,14 +89,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/persons/103",
+							"raw": "{{baseUrl}}{{path}}/persons/1",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"persons",
-								"103"
+								"1"
 							]
 						}
 					},
@@ -120,11 +117,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/persons?documentNumber=12345678",
+							"raw": "{{baseUrl}}{{path}}/persons?documentNumber=12345678",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"persons"
 							],
@@ -168,11 +164,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/actives/",
+							"raw": "{{baseUrl}}{{path}}/actives/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"actives",
 								""
@@ -197,14 +192,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/actives/",
+							"raw": "{{baseUrl}}{{path}}/actives",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
-								"actives",
-								""
+								"actives"
 							]
 						}
 					},
@@ -226,11 +219,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/actives/least-used?actives=test",
+							"raw": "{{baseUrl}}{{path}}/actives/least-used?actives=test",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"actives",
 								"least-used"
@@ -261,14 +253,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/actives/2",
+							"raw": "{{baseUrl}}{{path}}/actives/1",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"actives",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -326,11 +317,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/loans/1",
+							"raw": "{{baseUrl}}{{path}}/loans/1",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"loans",
 								"1"
@@ -364,11 +354,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/loans/",
+							"raw": "{{baseUrl}}{{path}}/loans/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"loans",
 								""
@@ -402,11 +391,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/loans/complete-last?internalCode=test",
+							"raw": "{{baseUrl}}{{path}}/loans/complete-last?internalCode=test",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"loans",
 								"complete-last"
@@ -437,11 +425,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/loans/all",
+							"raw": "{{baseUrl}}{{path}}/loans/all",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"loans",
 								"all"
@@ -466,11 +453,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/loans/download?startDate=2020-02-01&endDate=2022-10-10",
+							"raw": "{{baseUrl}}{{path}}/loans/download?startDate=2020-02-01&endDate=2022-10-10",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"loans",
 								"download"
@@ -519,11 +505,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/returns/",
+							"raw": "{{baseUrl}}{{path}}/returns/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"returns",
 								""
@@ -548,11 +533,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/returns/1",
+							"raw": "{{baseUrl}}{{path}}/returns/1",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"returns",
 								"1"
@@ -581,11 +565,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/auth/signin",
+							"raw": "{{baseUrl}}{{path}}/auth/signin",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"signin"
@@ -609,11 +592,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/auth/refreshtoken",
+							"raw": "{{baseUrl}}{{path}}/auth/refreshtoken",
 							"host": [
-								"localhost"
+								"{{baseUrl}}{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"refreshtoken"
