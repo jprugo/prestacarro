@@ -19,5 +19,4 @@ public class PersonModelAssembler implements RepresentationModelAssembler<Person
                         .withSelfRel());
 	}
 
-	
 }

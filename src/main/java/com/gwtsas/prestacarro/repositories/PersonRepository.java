@@ -12,4 +12,5 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
 
 	@Query("SELECT p FROM Person p WHERE p.documentNumber = ?1")
 	Optional<Person> getByDocumentNumber(String documentNumber);
+
 }

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,20 +30,21 @@ import com.gwtsas.prestacarro.services.impl.ActiveServiceImpl;
 @RequestMapping("/actives")
 public class ActiveController {
 
-	@Autowired
 	public ActiveServiceImpl activeServiceImpl;
 
-	@Autowired
 	public ActiveModelAssembler activeModelAssembler;
+
+	public ActiveController(ActiveServiceImpl activeServiceImpl, ActiveModelAssembler activeModelAssembler){
+		this.activeModelAssembler = activeModelAssembler;
+		this.activeServiceImpl = activeServiceImpl;
+	}
 
 	@GetMapping
 	public ResponseEntity<?> getAll() {
 
 		List<Active> resultList = activeServiceImpl.getAllActives();
 		if (resultList.size() > 0) {
-
 			var body = resultList.stream().map(e -> activeModelAssembler.toModel(e)).collect(Collectors.toList());
-
 			return ResponseEntity.ok().contentType(MediaTypes.HAL_JSON).body(body);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -62,7 +62,6 @@ public class ActiveController {
 		var active = activeServiceImpl.createActive(activeSchema);
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(active.getId())
 				.toUri();
-
 		return ResponseEntity.created(location).body(active);
 	}
 
@@ -79,7 +78,6 @@ public class ActiveController {
 	@GetMapping("/least-used")
 	public ResponseEntity<?> getTheLeastUsedActive(@RequestParam String actives) {
 		List<String> list = Arrays.asList(actives.split(",", 8));
-
 		return ResponseEntity.ok(activeServiceImpl.getTheLeastUsedActive(list));
 	}
 

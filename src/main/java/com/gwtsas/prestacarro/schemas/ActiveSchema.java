@@ -1,10 +1,12 @@
 package com.gwtsas.prestacarro.schemas;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-
+@Data
 public class ActiveSchema implements Serializable {
 
 	private static final long serialVersionUID = 3285886385102136866L;
@@ -15,19 +17,4 @@ public class ActiveSchema implements Serializable {
 	@NotBlank
 	private String serial;
 
-	public String getInternalCode() {
-		return internalCode;
-	}
-
-	public void setInternalCode(String internalCode) {
-		this.internalCode = internalCode;
-	}
-
-	public String getSerial() {
-		return serial;
-	}
-
-	public void setSerial(String serial) {
-		this.serial = serial;
-	}
 }

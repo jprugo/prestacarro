@@ -3,7 +3,8 @@ package com.gwtsas.prestacarro.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gwtsas.prestacarro.schemas.PersonSchema;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,12 @@ import com.gwtsas.prestacarro.services.PersonService;
 
 @Service
 public class PersonServiceImpl implements PersonService{
-	
-	@Autowired
+
 	public PersonRepository personRepository;
+
+	public PersonServiceImpl(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
 
 	@Override
 	public List<Person> getAll() {
@@ -27,7 +31,8 @@ public class PersonServiceImpl implements PersonService{
 	}
 
 	@Override
-	public Person createPerson(Person person) {
+	public Person createPerson(PersonSchema personSchema) {
+		Person person = Person.builder().documentNumber(personSchema.getDocumentNumber()).firstName(personSchema.getFirstName()).middleName(personSchema.getMiddleName()).lastName(personSchema.getLastName()).surName(personSchema.getSurName()).sex(personSchema.getSex()).birthDate(personSchema.getBirthDate()).build();
 		return personRepository.save(person);
 	}
 

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,23 +41,31 @@ import com.gwtsas.prestacarro.security.services.UserDetailsImpl;
 @RequestMapping("/auth")
 public class AuthController {
 
-	@Autowired
 	AuthenticationManager authenticationManager;
 
-	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
 	RoleRepository roleRepository;
 
-	@Autowired
 	PasswordEncoder encoder;
 
-	@Autowired
 	RefreshTokenService refreshTokenService;
 
-	@Autowired
 	JwtUtils jwtUtils;
+
+	public AuthController(AuthenticationManager authenticationManager,
+	UserRepository userRepository,
+	RoleRepository roleRepository,
+	PasswordEncoder encoder,
+	RefreshTokenService refreshTokenService,
+	JwtUtils jwtUtils){
+		this.authenticationManager = authenticationManager;
+		this.userRepository= userRepository;
+		this.roleRepository= roleRepository;
+		this.encoder=  encoder;
+		this.refreshTokenService= refreshTokenService;
+		this.jwtUtils= jwtUtils;
+	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginSchema loginRequest) {
@@ -79,7 +86,7 @@ public class AuthController {
 				userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
 
-	@PostMapping("/refreshtoken")
+	@PostMapping("/refresh")
 	public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshSchema request) {
 		String requestRefreshToken = request.getRefreshToken();
 		return refreshTokenService.findByToken(requestRefreshToken).map(refreshTokenService::verifyExpiration)
@@ -99,8 +106,7 @@ public class AuthController {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
 		// Create new user's account
-		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()));
+		User user =  User.builder().username(signUpRequest.getUsername()).email(signUpRequest.getEmail()).password(encoder.encode(signUpRequest.getPassword())).build();
 		Set<String> strRoles = user.getRoles().stream().map(r -> r.getName().toString()).collect(Collectors.toSet());
 		Set<Role> roles = new HashSet<>();
 		if (strRoles == null) {

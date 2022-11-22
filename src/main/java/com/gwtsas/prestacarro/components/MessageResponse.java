@@ -1,21 +1,13 @@
 package com.gwtsas.prestacarro.components;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class MessageResponse {
 
 	private String message;
-
-	
-	public MessageResponse(String message) {
-		super();
-		this.message = message;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 	
 }
