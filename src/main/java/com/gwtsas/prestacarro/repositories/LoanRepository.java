@@ -16,4 +16,5 @@ public interface LoanRepository extends PagingAndSortingRepository<Loan, Long> {
 
 	@Query(value = "select t2.* from (SELECT tl.*, RANK() OVER (partition by id_active order by loan_registration_date DESC) as \"ranking\" FROM (SELECT * FROM tbl_loan WHERE id_active = (SELECT id_active FROM tbl_active WHERE internal_code = :internalCode )) tl) t2 where ranking = 1;", nativeQuery = true)
 	Optional<Loan> getLastActiveLoan(String internalCode);
+
 }

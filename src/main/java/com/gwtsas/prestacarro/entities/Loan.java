@@ -16,10 +16,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_loan")
 @JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@Data
+@Builder(toBuilder = true)
+// BUILDER SETTING
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+// JPA SETTING
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Loan implements Serializable {
 
 	private static final long serialVersionUID = 1973338459522680796L;
@@ -38,59 +45,9 @@ public class Loan implements Serializable {
 	private Person person;
 
 	@Column(name = "loan_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP()")
+	@Builder.Default
 	private LocalDateTime registrationDate = LocalDateTime.now();
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "loan")
 	private Return returnObject;
-
-	public Long getId() {
-		return id;
-	}
-
-	public Active getActive() {
-		return active;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public Return getReturnObject() {
-		return returnObject;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setActive(Active active) {
-		this.active = active;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
-	public void setReturnObject(Return returnObject) {
-		this.returnObject = returnObject;
-	}
-
-	// Constructors
-	public Loan(Active active, Person person) {
-		this.active = active;
-		this.person = person;
-	}
-
-	protected Loan() {
-		super();
-	}
-
 }

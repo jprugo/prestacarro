@@ -12,9 +12,12 @@ import com.gwtsas.prestacarro.services.ActiveService;
 
 @Service
 public class ActiveServiceImpl implements ActiveService{
-	
-	@Autowired
+
 	public  ActiveRepository activeRepository;
+
+	public ActiveServiceImpl(ActiveRepository activeRepository) {
+		this.activeRepository = activeRepository;
+	}
 
 	@Override
 	public List<Active> getAllActives() {
@@ -28,9 +31,9 @@ public class ActiveServiceImpl implements ActiveService{
 
 	@Override
 	public Active createActive(ActiveSchema activeSchema) {
-		Active active = new Active();
-		active.setInternalCode(activeSchema.getInternalCode());
-		active.setSerial(activeSchema.getSerial());
+		Active active = Active.builder()
+				.internalCode(activeSchema.getInternalCode())
+				.serial(activeSchema.getSerial()).build();
 		return activeRepository.save(active);
 	}
 

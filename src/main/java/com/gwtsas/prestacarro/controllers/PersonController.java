@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import com.gwtsas.prestacarro.schemas.PersonSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -29,14 +30,18 @@ import com.gwtsas.prestacarro.services.impl.PersonServiceImpl;
 @RequestMapping("/persons")
 public class PersonController {
 
-	@Autowired
 	public PersonServiceImpl personServiceImpl;
 
-	@Autowired
 	public PersonModelAssembler personModelAssembler;
 
-	@Autowired
 	public PagedResourcesAssembler<Person> pagedResourceAssembler;
+
+	@Autowired
+	public PersonController(PersonServiceImpl personServiceImpl, PersonModelAssembler personModelAssembler){
+		this.personServiceImpl = personServiceImpl;
+		this.personModelAssembler = personModelAssembler;
+		//this.pagedResourceAssembler = pagedResourceAssembler;
+	}
 
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
@@ -50,16 +55,18 @@ public class PersonController {
 		} else {
 			return ResponseEntity.noContent().build();
 		}
-
 	}
 
 	@PostMapping
-	public ResponseEntity<?> createPerson(@RequestBody Person person) {
+	public ResponseEntity<?> createPerson(@RequestBody PersonSchema personSchema) {
+
+		Person person;
+
 		try {
-			person = personServiceImpl.createPerson(person);
+			person = personServiceImpl.createPerson(personSchema);
 			return ResponseEntity.created(URI.create("/person/" + String.valueOf(person.getId()))).body(person);
 		} catch (DataIntegrityViolationException exception) {
-			person = personServiceImpl.getPersonByDocumentNumber(person.getDocumentNumber());
+			person = personServiceImpl.getPersonByDocumentNumber(personSchema.getDocumentNumber());
 			return ResponseEntity.status(208).body(person);
 		}
 

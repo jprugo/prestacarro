@@ -1,5 +1,6 @@
 package com.gwtsas.prestacarro.services.impl;
 
+import com.gwtsas.prestacarro.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,19 @@ import com.gwtsas.prestacarro.services.ReturnService;
 @Service
 public class ReturnServiceImpl implements ReturnService {
 
-	@Autowired
 	public ReturnRepository returnRepository;
 
-	@Autowired
 	public LoanServiceImpl loanServiceImpl;
 
+	@Autowired
+	public ReturnServiceImpl(ReturnRepository returnRepository, LoanServiceImpl loanServiceImpl) {
+		this.returnRepository = returnRepository;
+		this.loanServiceImpl = loanServiceImpl;
+	}
+
 	@Override
-	public Return createReturn(ReturnSchema returnJson) {
-		Return returnObject = new Return(loanServiceImpl.getLoanById(returnJson.getIdLoan()));
+	public Return createReturn(ReturnSchema returnSchema) {
+		Return returnObject = Return.builder().loan(loanServiceImpl.getLoanById(returnSchema.getIdLoan())).build();
 		return returnRepository.save(returnObject);
 	}
 

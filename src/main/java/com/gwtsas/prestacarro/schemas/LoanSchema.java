@@ -1,10 +1,13 @@
 package com.gwtsas.prestacarro.schemas;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+@Data
 public class LoanSchema implements Serializable {
 
 	private static final long serialVersionUID = 3285886385102136866L;
@@ -17,19 +20,4 @@ public class LoanSchema implements Serializable {
 	@NotNull
 	private Long idPerson;
 
-	public Long getIdActive() {
-		return idActive;
-	}
-
-	public void setIdActive(Long idActive) {
-		this.idActive = idActive;
-	}
-
-	public Long getIdPerson() {
-		return idPerson;
-	}
-
-	public void setIdPerson(Long idPerson) {
-		this.idPerson = idPerson;
-	}
 }

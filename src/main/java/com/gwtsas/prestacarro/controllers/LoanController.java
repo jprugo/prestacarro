@@ -1,17 +1,25 @@
 package com.gwtsas.prestacarro.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import com.gwtsas.prestacarro.components.ReportLoan;
+import com.gwtsas.prestacarro.services.impl.LoansReportGeneratorImpl;
+import net.sf.jasperreports.engine.JRException;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,18 +46,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoanController {
 
-	@Autowired
 	public LoanServiceImpl loanServiceImpl;
 
-	@Autowired
 	public LoanModelAssembler loanModelAssembler;
 
-	@Autowired
 	public PagedResourcesAssembler<Loan> pagedResourceAssembler;
 
-	/*
-	 * @Autowired public PageConfiguration pageConfiguration;
-	 */
+	public LoansReportGeneratorImpl loansReportGenerator;
+
+	private static Logger LOGGER = LoggerFactory.getLogger(LoansReportGeneratorImpl.class);
+
+	@Autowired
+	public LoanController(LoanServiceImpl loanServiceImpl, LoanModelAssembler loanModelAssembler, LoansReportGeneratorImpl loansReportGenerator) {
+		this.loanServiceImpl = loanServiceImpl;
+		this.loanModelAssembler = loanModelAssembler;
+		//this.pagedResourceAssembler = pagedResourceAssembler;
+		this.loansReportGenerator = loansReportGenerator;
+	}
 
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
@@ -65,7 +78,6 @@ public class LoanController {
 		} else {
 			return ResponseEntity.noContent().build();
 		}
-
 	}
 
 	@GetMapping("/{id}")
@@ -80,26 +92,31 @@ public class LoanController {
 		return ResponseEntity.created(URI.create("/loan/" + String.valueOf(loan.getId()))).body(loan);
 	}
 
-	@GetMapping("/download")
-	public ResponseEntity<?> getFile(
-			@RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-		String filename = "loans.xlsx";
-
-		InputStreamResource file = new InputStreamResource(
-				loanServiceImpl.getExcelFile(startDate.atStartOfDay(), endDate.atStartOfDay()));
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-				.contentType(MediaType.parseMediaType(
-						"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"))
-				.body(file);
-	}
-
 	@PutMapping("/complete-last")
 	public ResponseEntity<?> completeLastLoan(@Valid @RequestParam String internalCode) {
 		var loan = loanServiceImpl.getLastActiveLoan(internalCode);
-		loan.setReturnObject(new Return(loan));
+		loan.setReturnObject(Return.builder().loan(loan).build());
 		loan = loanServiceImpl.updateLoan(loan);
 		return ResponseEntity.ok(loan);
+	}
+
+	@GetMapping(value = "/report", produces = MediaType.APPLICATION_PDF_VALUE)
+	public byte[] getReport(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate startDate,
+									   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws JRException, IOException {
+
+		File pdf = File.createTempFile("loans-output.", ".pdf");
+
+		FileOutputStream pdfOutputStream = new FileOutputStream(pdf);
+
+		List<ReportLoan> loans =  loanServiceImpl.mapToReportClass(loanServiceImpl.getLoansBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay()));
+
+		loans.stream().forEach(myPojo -> LOGGER.info(myPojo.toString()));
+
+		loansReportGenerator.generateReport(loans, pdfOutputStream);
+
+		LOGGER.info("La ruta es: " + pdf.getAbsolutePath());
+
+		return FileUtils.readFileToByteArray(pdf);
 	}
 
 }

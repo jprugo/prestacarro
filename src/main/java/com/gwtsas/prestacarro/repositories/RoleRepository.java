@@ -10,4 +10,5 @@ import com.gwtsas.prestacarro.entities.Role;
 public interface RoleRepository extends JpaRepository<Role, Long>{
 
 	Optional<Role> findByName(EnumRole name);
+
 }

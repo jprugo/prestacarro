@@ -14,15 +14,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_person")
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
+@Data
+@Builder
+// BUILDER SETTING
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+// JPA SETTING
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Person implements Serializable{
 	
 	private static final long serialVersionUID = -4471407844111884254L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,30 +37,24 @@ public class Person implements Serializable{
 	private Long id;
            
 	@Column(name="first_name", nullable = false)
-    @NotBlank(message = "The first name should not be empty")
 	private String firstName;
 	
 	@Column(name="middle_name")
 	private String middleName;
-	
-    
+
 	@Column(name="last_name",nullable = false)
-	@NotBlank(message = "The last name should not be empty")
 	private String lastName;
 	
 	@Column(name="sur_name")
 	private String surName;
-	
-    @NotBlank(message = "The document should not be empty")
+
 	@Column(nullable = false, unique=true)
 	private String documentNumber;
-	
-    @NotBlank(message = "Document number should not be empty")
+
 	@Column(nullable = false)
 	private String birthDate; 
 	
 	@Column(nullable = false)
-    @NotBlank(message = "Sex name should not be empty")
 	private String sex;
 
 	@Column(
@@ -61,47 +62,12 @@ public class Person implements Serializable{
 			nullable= false,
 			columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP()"
 	)
+	@Builder.Default
 	private LocalDateTime registrationDate = LocalDateTime.now();
-	
 
 	@OneToMany(mappedBy="person", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Loan> loans;
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getSurName() {
-		 return surName;
-	}
-
-	public String getDocumentNumber() {
-		return documentNumber;
-	}
-
-	public String getBirthDate() {
-		return birthDate;
-	}
-
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-	
-	public String getSex() {
-		return sex;
-	}
 
 	public String getFullName() {
 		

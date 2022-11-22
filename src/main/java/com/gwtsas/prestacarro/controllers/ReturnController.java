@@ -24,8 +24,12 @@ import com.gwtsas.prestacarro.services.impl.ReturnServiceImpl;
 @RequestMapping("/returns")
 public class ReturnController {
 
-	@Autowired
 	public ReturnServiceImpl returnServiceImpl;
+
+	@Autowired
+	public ReturnController(ReturnServiceImpl returnServiceImpl){
+		this.returnServiceImpl = returnServiceImpl;
+	}
 
 	@PostMapping
 	public ResponseEntity<?> createReturn(@RequestBody ReturnSchema returnSchema) throws JsonProcessingException {
@@ -34,12 +38,11 @@ public class ReturnController {
 			Return returnObject = returnServiceImpl.createReturn(returnSchema);
 			Loan loan = returnObject.getLoan();
 			loan.setReturnObject(returnObject);
-			return ResponseEntity.created(URI.create("/return/" + String.valueOf(returnObject.getId()))).body(loan);
+			return ResponseEntity.created(URI.create("/return/" + returnObject.getId())).body(loan);
 		} catch (DataIntegrityViolationException exception) {
 			Return returnObject = returnServiceImpl.getReturnByLoan(returnSchema.getIdLoan());
 			return ResponseEntity.status(208).body(returnObject);
 		}
-
 	}
 
 	@GetMapping("/{id}")
