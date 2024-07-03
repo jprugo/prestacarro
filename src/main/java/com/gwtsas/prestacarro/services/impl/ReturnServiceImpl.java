@@ -1,5 +1,6 @@
 package com.gwtsas.prestacarro.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gwtsas.prestacarro.entities.Loan;
@@ -13,6 +14,7 @@ public class ReturnServiceImpl implements ReturnService {
 	public ReturnRepository returnRepository;
 
 
+	@Autowired
 	public ReturnServiceImpl(ReturnRepository returnRepository, LoanServiceImpl loanServiceImpl) {
 		this.returnRepository = returnRepository;
 	}

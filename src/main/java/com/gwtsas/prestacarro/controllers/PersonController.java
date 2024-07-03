@@ -5,6 +5,8 @@ import java.net.URI;
 import javax.validation.Valid;
 
 import com.gwtsas.prestacarro.schemas.PersonSchema;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -35,6 +37,7 @@ public class PersonController {
 
 	public PagedResourcesAssembler<Person> pagedResourceAssembler;
 
+	@Autowired
 	public PersonController(PersonServiceImpl personServiceImpl, PersonModelAssembler personModelAssembler){
 		this.personServiceImpl = personServiceImpl;
 		this.personModelAssembler = personModelAssembler;

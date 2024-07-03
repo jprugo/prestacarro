@@ -5,6 +5,8 @@ import java.util.List;
 
 
 import com.gwtsas.prestacarro.schemas.PersonSchema;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,7 @@ public class PersonServiceImpl implements PersonService{
 
 	public PersonRepository personRepository;
 
+	@Autowired
 	public PersonServiceImpl(PersonRepository personRepository) {
 		this.personRepository = personRepository;
 	}

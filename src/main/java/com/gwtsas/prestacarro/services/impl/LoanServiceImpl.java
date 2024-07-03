@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.gwtsas.prestacarro.components.ReportLoan;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +27,8 @@ public class LoanServiceImpl implements LoanService {
 	public PersonServiceImpl personServiceImpl;
 
 	public ActiveServiceImpl activeServiceImpl;
-
+	
+	@Autowired
 	public LoanServiceImpl(LoanRepository loanRepository, PersonServiceImpl personServiceImpl, ActiveServiceImpl activeServiceImpl){
 		this.activeServiceImpl = activeServiceImpl;
 		this.personServiceImpl = personServiceImpl;
@@ -68,8 +71,8 @@ public class LoanServiceImpl implements LoanService {
 
 	@Override
 	public Loan createLoan(LoanSchema loanSchema) {
-		Loan loan = Loan.builder().active(activeServiceImpl.getActiveById(loanSchema.getIdActive())).person(personServiceImpl.getPersonaById(loanSchema.getIdPerson())).build()
-;		return loanRepository.save(loan);
+		Loan loan = Loan.builder().active(activeServiceImpl.getActiveById(loanSchema.getIdActive())).person(personServiceImpl.getPersonaById(loanSchema.getIdPerson())).build();
+		return loanRepository.save(loan);
 	}
 
 	@Override

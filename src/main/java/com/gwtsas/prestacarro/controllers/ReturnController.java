@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +32,7 @@ public class ReturnController {
 	public ReturnServiceImpl returnServiceImpl;
 	public LoanServiceImpl loanServiceImpl;
 
+	@Autowired
 	public ReturnController(ReturnServiceImpl returnServiceImpl, LoanServiceImpl loanServiceImpl){
 		this.returnServiceImpl = returnServiceImpl;
 		this.loanServiceImpl = loanServiceImpl;

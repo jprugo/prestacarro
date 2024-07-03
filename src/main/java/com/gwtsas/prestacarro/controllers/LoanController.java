@@ -15,6 +15,7 @@ import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,14 +26,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gwtsas.prestacarro.entities.Loan;
-import com.gwtsas.prestacarro.entities.Return;
 import com.gwtsas.prestacarro.models.LoanModelAssembler;
 import com.gwtsas.prestacarro.schemas.LoanSchema;
 import com.gwtsas.prestacarro.services.impl.LoanServiceImpl;
@@ -55,6 +54,7 @@ public class LoanController {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(LoansReportGeneratorImpl.class);
 
+	@Autowired
 	public LoanController(LoanServiceImpl loanServiceImpl, LoanModelAssembler loanModelAssembler, LoansReportGeneratorImpl loansReportGenerator) {
 		this.loanServiceImpl = loanServiceImpl;
 		this.loanModelAssembler = loanModelAssembler;
